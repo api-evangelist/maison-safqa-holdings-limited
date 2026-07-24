@@ -1,0 +1,268 @@
+openapi: 3.1.1
+info:
+  title: Maison Safqa Brand Developer Inventory API
+  version: 1.0.0
+  description: Update inventory quantities for product variants. Changes are stored locally and periodically synced to Shopify.
+servers:
+- url: https://api.maisonsafqa.com/v1
+security:
+- ApiKeyAuth: []
+tags:
+- name: Inventory
+  description: Update inventory quantities for product variants. Changes are stored locally and periodically synced to Shopify.
+paths:
+  /products/{product_id}/inventory:
+    patch:
+      tags:
+      - Inventory
+      summary: Update Product Inventory
+      description: Updates inventory quantities for one or more variants of a product. Inventory changes are stored locally and synced to Shopify periodically. Brand data always takes precedence over Shopify data.
+      parameters:
+      - schema:
+          type: string
+        name: product_id
+        in: path
+        required: true
+        description: 'Product identifier (format: product_XXXXXXXXXXXXXXXX)'
+      responses:
+        '200':
+          description: Inventory updated successfully
+          headers:
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: Requests remaining in current window
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: Maximum requests allowed per minute (stricter for inventory updates)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InventoryUpdateResponse'
+        '400':
+          description: Validation errors
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Access denied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Product not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateInventoryRequest'
+        required: true
+  /inventory/bulk:
+    patch:
+      tags:
+      - Inventory
+      summary: Bulk Update Inventory
+      description: Updates inventory for multiple products in a single request. Maximum 500 products per request.
+      responses:
+        '200':
+          description: All inventory updates successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BulkUpdateInventoryResponse'
+        '207':
+          description: Partial success - some updates succeeded, some failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BulkUpdateInventoryResponse'
+        '400':
+          description: Validation errors
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkUpdateInventoryRequest'
+        required: true
+components:
+  schemas:
+    BulkInventoryProductUpdate:
+      type: object
+      properties:
+        product_id:
+          type: string
+          description: Product ID
+        variants:
+          type: array
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/VariantInventoryUpdate'
+          description: Variant inventory updates
+      required:
+      - product_id
+      - variants
+    BulkUpdateInventoryResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          description: True if all updates were successful
+        message:
+          type: string
+          description: Summary message
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/BulkInventoryProductResult'
+          description: Results for each product
+    InventoryUpdateResponse:
+      type: object
+      description: Response for updating inventory on a single product
+      properties:
+        error:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/ApiError'
+          description: Error object if request failed, null on success
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/InventoryUpdateResult'
+          description: Results for each variant update
+        message:
+          type: string
+          description: Summary message
+    VariantInventoryUpdate:
+      type: object
+      properties:
+        sku:
+          type: string
+          description: Variant SKU
+        inventory_quantity:
+          type: integer
+          minimum: 0
+          description: New inventory quantity
+      required:
+      - sku
+      - inventory_quantity
+    BulkInventoryProductResult:
+      type: object
+      properties:
+        product_id:
+          type: string
+          description: Product ID
+        success:
+          type: boolean
+          description: Whether all variants were updated successfully
+        variants:
+          type: array
+          items:
+            $ref: '#/components/schemas/InventoryUpdateResult'
+          description: Results for each variant
+        error:
+          type: string
+          description: Error message if product-level error occurred
+    ApiError:
+      type: object
+      description: Structured error object
+      properties:
+        field:
+          type: string
+          description: Field that caused the error
+        message:
+          type: string
+          description: Human-readable error message
+      required:
+      - field
+      - message
+    ErrorResponse:
+      type: object
+      description: Standard error response format
+      properties:
+        error:
+          $ref: '#/components/schemas/ApiError'
+          description: Error details with field and message
+      required:
+      - error
+    UpdateInventoryRequest:
+      type: object
+      properties:
+        variants:
+          type: array
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/VariantInventoryUpdate'
+          description: Variant inventory updates
+      required:
+      - variants
+    BulkUpdateInventoryRequest:
+      type: object
+      properties:
+        products:
+          type: array
+          minItems: 1
+          maxItems: 500
+          items:
+            $ref: '#/components/schemas/BulkInventoryProductUpdate'
+          description: Array of product inventory updates (maximum 500)
+      required:
+      - products
+    InventoryUpdateResult:
+      type: object
+      properties:
+        sku:
+          type: string
+          description: Variant SKU
+        success:
+          type: boolean
+          description: Whether the update was successful
+        old_quantity:
+          type: integer
+          description: Previous inventory quantity
+        new_quantity:
+          type: integer
+          description: New inventory quantity
+        error:
+          type: string
+          description: Error message if update failed
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-MaisonSafqa-Api-Key
+      description: API key for authentication. Use 'ms_test_...' keys for development/testing and 'ms_live_...' keys for production. Keys are environment-specific and will only work in their respective environments.
