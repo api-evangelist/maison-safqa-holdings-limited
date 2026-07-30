@@ -1,8 +1,13 @@
 aid: maison-safqa-holdings-limited
 name: Maison Safqa Holdings Limited
-description: Maison Safqa Holdings Limited is a company surfaced as a portfolio company of 500-global
-  and added to the API Evangelist network as a stub for enrichment. This profile is a lead awaiting the
-  enrichment pipeline.
+description: >-
+  Maison Safqa Holdings Limited operates Maison Safqa, a members-only luxury flash-sale marketplace
+  (built on Shopify) offering exclusive time-limited sales on high-end brands. For its partner
+  brands it publishes the Maison Safqa Brand Developer API — an API-key-authenticated REST interface
+  for creating products (single and bulk) and updating inventory levels, which the platform then
+  syncs into Shopify with brand data taking precedence on conflict and prices converted to SAR on
+  ingestion. Surfaced originally as a 500 Global portfolio lead and enriched from the provider's
+  public developer portal.
 url: https://raw.githubusercontent.com/api-evangelist/maison-safqa-holdings-limited/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -10,17 +15,114 @@ x-backed-by:
 - 500-global
 x-tier: stub
 x-tier-reason: portfolio-lead
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://cdn.shopify.com/s/files/1/0865/0224/4663/files/logo-ms.svg?v=1763809309
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-20'
 tags:
 - Company
-apis: []
+- Retail
+- E-commerce
+- Luxury
+- Marketplace
+- Product Catalog
+- Inventory Management
+- Shopify
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+apis:
+- aid: maison-safqa-holdings-limited:maison-safqa-holdings-limited-inventory-api
+  name: Maison Safqa Holdings Limited Inventory API
+  description: >-
+    Update inventory quantities for product variants. Changes are stored locally and periodically synced
+    to Shopify.
+  humanURL: https://developer.maisonsafqa.com
+  baseURL: https://api.maisonsafqa.com/v1
+  tags:
+  - Inventory
+  properties:
+  - type: OpenAPI
+    url: openapi/maison-safqa-holdings-limited-inventory-api-openapi.yml
+  - type: Documentation
+    url: https://developer.maisonsafqa.com
+  - type: APIReference
+    url: https://developer.maisonsafqa.com/products
+  - type: GettingStarted
+    url: https://developer.maisonsafqa.com/getting-started
+- aid: maison-safqa-holdings-limited:maison-safqa-holdings-limited-products-api
+  name: Maison Safqa Holdings Limited Products API
+  description: >-
+    Create, retrieve, and update products. Products are created in draft status and synced to Shopify
+    when activated.
+  humanURL: https://developer.maisonsafqa.com
+  baseURL: https://api.maisonsafqa.com/v1
+  tags:
+  - Products
+  properties:
+  - type: OpenAPI
+    url: openapi/maison-safqa-holdings-limited-products-api-openapi.yml
+  - type: Documentation
+    url: https://developer.maisonsafqa.com
+  - type: APIReference
+    url: https://developer.maisonsafqa.com/products
+  - type: GettingStarted
+    url: https://developer.maisonsafqa.com/getting-started
 common:
+- type: DeveloperPortal
+  url: https://developer.maisonsafqa.com
+- type: Documentation
+  url: https://developer.maisonsafqa.com
+- type: Support
+  url: mailto:itsupport@maisonsafqa.com
+- type: PrivacyPolicy
+  url: https://www.maisonsafqa.com/privacy-policy
 - type: Website
   url: https://maisonsafqa.com
+- type: Authentication
+  url: authentication/maison-safqa-holdings-limited-authentication.yml
+- type: Conventions
+  url: conventions/maison-safqa-holdings-limited-conventions.yml
+- type: ErrorCatalog
+  url: errors/maison-safqa-holdings-limited-problem-types.yml
+- type: RateLimits
+  url: rate-limits/maison-safqa-holdings-limited-rate-limits.yml
+- type: Lifecycle
+  url: lifecycle/maison-safqa-holdings-limited-lifecycle.yml
+- type: Sandbox
+  url: sandbox/maison-safqa-holdings-limited-sandbox.yml
+- type: DataModel
+  url: data-model/maison-safqa-holdings-limited-data-model.yml
+- type: Conformance
+  url: conformance/maison-safqa-holdings-limited-conformance.yml
+- type: WellKnown
+  url: well-known/maison-safqa-holdings-limited-well-known.yml
+- type: LLMsTxt
+  url: llms/maison-safqa-holdings-limited-llms.txt
+- type: MCPServer
+  url: mcp/maison-safqa-holdings-limited-mcp.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: AgenticAccess
+  url: agentic-access/maison-safqa-holdings-limited-agentic-access.yml
+- type: DomainSecurity
+  url: security/maison-safqa-holdings-limited-domain-security.yml
+x-enrichment:
+  date: '2026-07-20'
+  status: nochange
+  artifacts_added: 0
+  pass: local-v1
