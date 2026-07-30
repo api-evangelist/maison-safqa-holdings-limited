@@ -1,0 +1,52 @@
+generated: '2026-07-20'
+method: searched
+source: https://developer.maisonsafqa.com/getting-started
+description: >-
+  Cross-cutting request/response semantics for the Maison Safqa Brand Developer API, harvested from
+  the developer docs and derived from the OpenAPI. The API is a product/inventory ingestion surface
+  that syncs brand catalog data into Shopify.
+authentication:
+  style: api-key
+  header: X-MaisonSafqa-Api-Key
+  environments:
+    test: ms_test_ prefixed keys
+    live: ms_live_ prefixed keys
+  ref: authentication/maison-safqa-holdings-limited-authentication.yml
+idempotency:
+  supported: false
+  notes: >-
+    No idempotency-key header or parameter is documented. Uniqueness is enforced instead at the data
+    layer — SKUs must be unique within a brand, so a duplicate create returns 400 rather than being
+    de-duplicated. Retries of create operations are not guaranteed safe.
+pagination:
+  supported: false
+  notes: The published surface has no list endpoints; products are fetched by id, so no pagination.
+bulk:
+  supported: true
+  max_items: 500
+  partial_success: true
+  status_code: 207
+  notes: >-
+    POST /products/bulk and PATCH /inventory/bulk accept up to 500 items and process valid items even
+    when some fail validation; failures are returned per-item in failed[]/results[].
+rate_limiting:
+  limit_per_minute: 300
+  headers:
+  - X-RateLimit-Limit
+  - X-RateLimit-Remaining
+  - X-RateLimit-Reset
+  - Retry-After
+  ref: rate-limits/maison-safqa-holdings-limited-rate-limits.yml
+error_envelope:
+  shape: '{ "error": { "field": string, "message": string } }'
+  rfc9457: false
+  ref: errors/maison-safqa-holdings-limited-problem-types.yml
+versioning:
+  scheme: uri-path
+  current: v1
+  ref: lifecycle/maison-safqa-holdings-limited-lifecycle.yml
+sync_model:
+  notes: >-
+    Products are created in draft status and synced to Shopify on activation by the Maison Safqa team.
+    Inventory changes are stored locally and periodically synced; brand data takes precedence over
+    Shopify on conflict. Prices submitted in brand currency are converted to SAR on the platform side.

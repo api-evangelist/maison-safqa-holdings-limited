@@ -1,0 +1,30 @@
+generated: '2026-07-20'
+method: derived
+status: candidate
+source: openapi/maison-safqa-holdings-limited-openapi-original.yml
+description: >-
+  Candidate MCP tool surface derived one-to-one from the Maison Safqa Brand Developer API operations.
+  No official hosted/remote MCP server was found for this provider; this is a governance starting
+  point, not a published server.
+server:
+  name: maison-safqa
+  transport: stdio
+tools:
+- name: create_product
+  description: Create a product in draft status (POST /products).
+  source_operation: openapi/maison-safqa-holdings-limited-openapi-original.yml#POST_/products
+- name: get_product
+  description: Retrieve a product by id (GET /products/{product_id}).
+  source_operation: openapi/maison-safqa-holdings-limited-openapi-original.yml#GET_/products/{product_id}
+- name: update_product
+  description: Update an existing product (PUT /products/{product_id}).
+  source_operation: openapi/maison-safqa-holdings-limited-openapi-original.yml#PUT_/products/{product_id}
+- name: bulk_create_products
+  description: Create up to 500 products in one request (POST /products/bulk).
+  source_operation: openapi/maison-safqa-holdings-limited-openapi-original.yml#POST_/products/bulk
+- name: update_product_inventory
+  description: Update inventory for a product's variants (PATCH /products/{product_id}/inventory).
+  source_operation: openapi/maison-safqa-holdings-limited-openapi-original.yml#PATCH_/products/{product_id}/inventory
+- name: bulk_update_inventory
+  description: Update inventory for up to 500 products (PATCH /inventory/bulk).
+  source_operation: openapi/maison-safqa-holdings-limited-openapi-original.yml#PATCH_/inventory/bulk

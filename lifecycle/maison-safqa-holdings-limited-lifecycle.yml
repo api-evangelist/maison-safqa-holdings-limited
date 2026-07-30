@@ -1,0 +1,20 @@
+generated: '2026-07-20'
+method: searched
+source: https://developer.maisonsafqa.com/getting-started
+versioning:
+  scheme: uri-path
+  current: v1
+  base_url: https://api.maisonsafqa.com/v1
+  docs: https://developer.maisonsafqa.com/getting-started
+deprecation:
+  policy_url: null
+  sunset_header: false
+  notes: No deprecation or Sunset/Deprecation header policy is published.
+sla:
+  url: null
+  uptime_target: null
+status_page: null
+deprecated_operations: []
+notes: >-
+  Single published major version (v1) carried in the URI path. No status page, SLA, or deprecation
+  policy was found on the developer portal or company site as of the probe date.

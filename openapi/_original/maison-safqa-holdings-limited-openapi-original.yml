@@ -1,0 +1,908 @@
+openapi: 3.1.1
+info:
+  title: Maison Safqa Brand Developer API
+  version: 1.0.0
+servers:
+- url: https://api.maisonsafqa.com/v1
+security:
+- ApiKeyAuth: []
+tags:
+- name: Products
+  description: Create, retrieve, and update products. Products are created in draft status and synced
+    to Shopify when activated.
+- name: Inventory
+  description: Update inventory quantities for product variants. Changes are stored locally and periodically
+    synced to Shopify.
+paths:
+  /products:
+    post:
+      tags:
+      - Products
+      summary: Create Product
+      description: Creates a new product in draft status. The product will be synced to Shopify when activated.
+        SKUs must be unique within your brand.
+      responses:
+        '201':
+          description: Product created successfully
+          headers:
+            X-RateLimit-Reset:
+              schema:
+                type: integer
+              description: Unix timestamp when rate limit resets
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: Requests remaining in current window
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: Maximum requests allowed per minute
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductResponse'
+        '400':
+          description: Validation errors or duplicate SKUs
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized - Invalid or missing API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden - Access denied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit exceeded
+          headers:
+            Retry-After:
+              schema:
+                type: integer
+              description: Seconds to wait before retrying
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProductRequest'
+        required: true
+  /products/{product_id}:
+    get:
+      tags:
+      - Products
+      summary: Get Product
+      description: Retrieves a specific product by its product_id. Only products belonging to the authenticated
+        brand can be accessed.
+      parameters:
+      - schema:
+          type: string
+        name: product_id
+        in: path
+        required: true
+        description: 'Product identifier (format: product_XXXXXXXXXXXXXXXX)'
+      responses:
+        '200':
+          description: Product retrieved successfully
+          headers:
+            X-RateLimit-Reset:
+              schema:
+                type: integer
+              description: Unix timestamp when rate limit resets
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: Requests remaining in current window
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: Maximum requests allowed per minute (300)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetProductResponse'
+        '401':
+          description: Unauthorized - Invalid or missing API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Product not found or does not belong to your brand
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit exceeded
+          headers:
+            Retry-After:
+              schema:
+                type: integer
+              description: Seconds to wait before retrying
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    put:
+      tags:
+      - Products
+      summary: Update Product
+      description: Updates an existing product. All fields are optional - only provided fields will be
+        updated. Only products belonging to the authenticated brand can be modified.
+      parameters:
+      - schema:
+          type: string
+        name: product_id
+        in: path
+        required: true
+        description: 'Product identifier (format: product_XXXXXXXXXXXXXXXX)'
+      responses:
+        '200':
+          description: Product updated successfully
+          headers:
+            X-RateLimit-Reset:
+              schema:
+                type: integer
+              description: Unix timestamp when rate limit resets
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: Requests remaining in current window
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: Maximum requests allowed per minute (300)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateProductResponse'
+        '400':
+          description: Validation errors or duplicate SKUs
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized - Invalid or missing API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Product not found or does not belong to your brand
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit exceeded
+          headers:
+            Retry-After:
+              schema:
+                type: integer
+              description: Seconds to wait before retrying
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateProductRequest'
+        required: true
+  /products/bulk:
+    post:
+      tags:
+      - Products
+      summary: Bulk Create Products
+      description: Creates multiple products in a single request. Maximum 500 products per request. Partial
+        success is supported - valid products will be created even if some fail validation.
+      responses:
+        '201':
+          description: All products created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BulkCreateProductResponse'
+        '207':
+          description: Partial success - some products created, some failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BulkCreateProductResponse'
+        '400':
+          description: Validation errors
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkCreateProductRequest'
+        required: true
+  /products/{product_id}/inventory:
+    patch:
+      tags:
+      - Inventory
+      summary: Update Product Inventory
+      description: Updates inventory quantities for one or more variants of a product. Inventory changes
+        are stored locally and synced to Shopify periodically. Brand data always takes precedence over
+        Shopify data.
+      parameters:
+      - schema:
+          type: string
+        name: product_id
+        in: path
+        required: true
+        description: 'Product identifier (format: product_XXXXXXXXXXXXXXXX)'
+      responses:
+        '200':
+          description: Inventory updated successfully
+          headers:
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: Requests remaining in current window
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: Maximum requests allowed per minute (stricter for inventory updates)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InventoryUpdateResponse'
+        '400':
+          description: Validation errors
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Access denied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Product not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateInventoryRequest'
+        required: true
+  /inventory/bulk:
+    patch:
+      tags:
+      - Inventory
+      summary: Bulk Update Inventory
+      description: Updates inventory for multiple products in a single request. Maximum 500 products per
+        request.
+      responses:
+        '200':
+          description: All inventory updates successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BulkUpdateInventoryResponse'
+        '207':
+          description: Partial success - some updates succeeded, some failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BulkUpdateInventoryResponse'
+        '400':
+          description: Validation errors
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkUpdateInventoryRequest'
+        required: true
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-MaisonSafqa-Api-Key
+      description: API key for authentication. Use 'ms_test_...' keys for development/testing and 'ms_live_...'
+        keys for production. Keys are environment-specific and will only work in their respective environments.
+  schemas:
+    ProductResponse:
+      type: object
+      description: Response for creating a single product
+      properties:
+        error:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/ApiError'
+          description: Error object if request failed, null on success
+        product:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/Product'
+          description: Created product object, null on error
+        message:
+          type: string
+          description: Success or error message
+    ApiError:
+      type: object
+      description: Structured error object
+      properties:
+        field:
+          type: string
+          description: Field that caused the error
+        message:
+          type: string
+          description: Human-readable error message
+      required:
+      - field
+      - message
+    Product:
+      type: object
+      properties:
+        id:
+          type: string
+          description: 'Unique product identifier (format: product_XXXXXXXXXXXXXXXX)'
+        title:
+          type: string
+          description: Product name
+        description:
+          type: string
+          description: Product description
+        handle:
+          type: string
+          description: URL slug
+        status:
+          type: string
+          description: Product status
+        variants:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductVariantResponse'
+        images:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductImageResponse'
+        product_type:
+          type: string
+          description: Product category
+        vendor:
+          type: string
+          description: Brand/vendor name
+        tags:
+          type: string
+          description: Comma-separated tags
+        created_at:
+          type: string
+          format: date-time
+          description: Creation timestamp
+        updated_at:
+          type: string
+          format: date-time
+          description: Last update timestamp
+        synced:
+          type: boolean
+          description: Whether product is synced to Shopify
+        last_synced_at:
+          type: string
+          format: date-time
+          description: Last sync timestamp
+    ProductVariantResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Variant ID
+        title:
+          type: string
+          description: Variant name
+        sku:
+          type: string
+          description: Variant SKU
+        price:
+          type: number
+          description: Price in SAR (converted from brand currency)
+        compare_at_price:
+          type: number
+          description: Compare at price in SAR
+        inventory_quantity:
+          type: integer
+          description: Current stock quantity
+        weight:
+          type: number
+          description: Variant weight
+        weight_unit:
+          type: string
+          description: Weight unit
+        requires_shipping:
+          type: boolean
+          description: Requires shipping
+        taxable:
+          type: boolean
+          description: Is taxable
+        barcode:
+          type: string
+          description: Product barcode
+        option1:
+          type: string
+          description: Option 1 value
+        option2:
+          type: string
+          description: Option 2 value
+        option3:
+          type: string
+          description: Option 3 value
+    ProductImageResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Image ID
+        src:
+          type: string
+          description: Image URL
+        alt:
+          type: string
+          description: Alt text
+        position:
+          type: integer
+          description: Display order
+    ErrorResponse:
+      type: object
+      description: Standard error response format
+      properties:
+        error:
+          $ref: '#/components/schemas/ApiError'
+          description: Error details with field and message
+      required:
+      - error
+    CreateProductRequest:
+      type: object
+      properties:
+        title:
+          type: string
+          minLength: 1
+          maxLength: 255
+          description: Product name
+        body_html:
+          type: string
+          maxLength: 65535
+          description: Product description (HTML allowed)
+        vendor:
+          type: string
+          maxLength: 255
+          description: Brand/vendor name
+        product_type:
+          type: string
+          maxLength: 255
+          description: Product category
+        tags:
+          type: string
+          maxLength: 1000
+          description: Comma-separated tags
+        handle:
+          type: string
+          pattern: ^[a-z0-9-]+$
+          description: URL slug (auto-generated if not provided)
+        template_suffix:
+          type: string
+          maxLength: 255
+          description: Template suffix
+        published_scope:
+          type: string
+          description: Published scope
+          default: web
+        variants:
+          type: array
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/ProductVariant'
+          description: At least one variant required
+        images:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductImage'
+          description: Product images
+      required:
+      - title
+      - variants
+    ProductVariant:
+      type: object
+      properties:
+        title:
+          type: string
+          minLength: 1
+          maxLength: 255
+          description: Variant name
+        sku:
+          type: string
+          minLength: 1
+          maxLength: 100
+          pattern: ^[A-Za-z0-9_-]+$
+          description: Unique SKU per brand (alphanumeric, hyphens, underscores). Different brands can
+            use the same SKU.
+        price:
+          type: number
+          minimum: 0
+          description: Price in brand currency
+        compare_at_price:
+          type: number
+          minimum: 0
+          description: Compare at price
+        inventory_quantity:
+          type: integer
+          minimum: 0
+          description: Stock quantity
+        weight:
+          type: number
+          minimum: 0
+          description: Weight in specified unit
+        weight_unit:
+          type: string
+          maxLength: 50
+          description: Weight unit
+          default: kg
+        barcode:
+          type: string
+          maxLength: 255
+          description: Product barcode
+        requires_shipping:
+          type: boolean
+          description: Requires shipping
+          default: true
+        taxable:
+          type: boolean
+          description: Is taxable
+          default: true
+      required:
+      - title
+      - sku
+      - price
+      - inventory_quantity
+    ProductImage:
+      type: object
+      properties:
+        src:
+          type: string
+          format: uri
+          description: Image URL (must be valid URL)
+        alt:
+          type: string
+          maxLength: 500
+          description: Alt text for accessibility
+        position:
+          type: integer
+          minimum: 1
+          maximum: 100
+          description: Display order
+      required:
+      - src
+    GetProductResponse:
+      type: object
+      description: Response for retrieving a product
+      properties:
+        error:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/ApiError'
+          description: Error object if request failed, null on success
+        product:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/Product'
+          description: Product object, null on error
+    UpdateProductResponse:
+      type: object
+      description: Response for updating a product
+      properties:
+        error:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/ApiError'
+          description: Error object if request failed, null on success
+        product:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/Product'
+          description: Updated product object, null on error
+        message:
+          type: string
+          description: Success or error message
+    UpdateProductRequest:
+      type: object
+      properties:
+        title:
+          type: string
+          minLength: 1
+          maxLength: 255
+          description: Product name
+        body_html:
+          type: string
+          maxLength: 65535
+          description: Product description (HTML allowed)
+        vendor:
+          type: string
+          maxLength: 255
+          description: Brand/vendor name
+        product_type:
+          type: string
+          maxLength: 255
+          description: Product category
+        tags:
+          type: string
+          maxLength: 1000
+          description: Comma-separated tags
+        handle:
+          type: string
+          pattern: ^[a-z0-9-]+$
+          description: URL slug
+        template_suffix:
+          type: string
+          maxLength: 255
+          description: Template suffix
+        published_scope:
+          type: string
+          description: Published scope
+        variants:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductVariant'
+          description: Product variants
+        images:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductImage'
+          description: Product images
+      description: All fields are optional for updates
+    BulkCreateProductResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          description: True if all products were created successfully
+        message:
+          type: string
+          description: Summary message
+        created:
+          type: array
+          items:
+            $ref: '#/components/schemas/BulkProductSuccess'
+          description: Successfully created products
+        failed:
+          type: array
+          items:
+            $ref: '#/components/schemas/BulkProductFailure'
+          description: Products that failed to create
+    BulkProductSuccess:
+      type: object
+      properties:
+        product_id:
+          type: string
+          description: Created product ID
+        title:
+          type: string
+          description: Product title
+    BulkProductFailure:
+      type: object
+      description: Details about a product that failed to create in bulk operation
+      properties:
+        index:
+          type: integer
+          description: Zero-based index of the product in the request array
+        title:
+          type: string
+          description: Product title
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiError'
+          description: List of validation errors for this product
+      required:
+      - index
+      - title
+      - errors
+    BulkCreateProductRequest:
+      type: object
+      properties:
+        products:
+          type: array
+          minItems: 1
+          maxItems: 500
+          items:
+            $ref: '#/components/schemas/CreateProductRequest'
+          description: Array of products to create (maximum 500)
+      required:
+      - products
+    InventoryUpdateResponse:
+      type: object
+      description: Response for updating inventory on a single product
+      properties:
+        error:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/ApiError'
+          description: Error object if request failed, null on success
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/InventoryUpdateResult'
+          description: Results for each variant update
+        message:
+          type: string
+          description: Summary message
+    InventoryUpdateResult:
+      type: object
+      properties:
+        sku:
+          type: string
+          description: Variant SKU
+        success:
+          type: boolean
+          description: Whether the update was successful
+        old_quantity:
+          type: integer
+          description: Previous inventory quantity
+        new_quantity:
+          type: integer
+          description: New inventory quantity
+        error:
+          type: string
+          description: Error message if update failed
+    UpdateInventoryRequest:
+      type: object
+      properties:
+        variants:
+          type: array
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/VariantInventoryUpdate'
+          description: Variant inventory updates
+      required:
+      - variants
+    VariantInventoryUpdate:
+      type: object
+      properties:
+        sku:
+          type: string
+          description: Variant SKU
+        inventory_quantity:
+          type: integer
+          minimum: 0
+          description: New inventory quantity
+      required:
+      - sku
+      - inventory_quantity
+    BulkUpdateInventoryResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          description: True if all updates were successful
+        message:
+          type: string
+          description: Summary message
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/BulkInventoryProductResult'
+          description: Results for each product
+    BulkInventoryProductResult:
+      type: object
+      properties:
+        product_id:
+          type: string
+          description: Product ID
+        success:
+          type: boolean
+          description: Whether all variants were updated successfully
+        variants:
+          type: array
+          items:
+            $ref: '#/components/schemas/InventoryUpdateResult'
+          description: Results for each variant
+        error:
+          type: string
+          description: Error message if product-level error occurred
+    BulkUpdateInventoryRequest:
+      type: object
+      properties:
+        products:
+          type: array
+          minItems: 1
+          maxItems: 500
+          items:
+            $ref: '#/components/schemas/BulkInventoryProductUpdate'
+          description: Array of product inventory updates (maximum 500)
+      required:
+      - products
+    BulkInventoryProductUpdate:
+      type: object
+      properties:
+        product_id:
+          type: string
+          description: Product ID
+        variants:
+          type: array
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/VariantInventoryUpdate'
+          description: Variant inventory updates
+      required:
+      - product_id
+      - variants

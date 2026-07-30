@@ -1,0 +1,37 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/maison-safqa-holdings-limited-openapi-original.yml
+description: >-
+  Entity-relationship graph derived from the OpenAPI component schemas. The core aggregate is a
+  Product, which owns one or more Variants (keyed by SKU, unique per brand) and zero or more Images.
+  Inventory is expressed as a mutable quantity on each Variant rather than a standalone entity.
+entities:
+- name: Product
+  id_field: id
+  id_format: product_XXXXXXXXXXXXXXXX
+  description: A brand catalog product, created in draft and synced to Shopify on activation.
+  key_fields: [id, title, handle, status, vendor, product_type, tags, synced, last_synced_at]
+- name: ProductVariant
+  key: sku
+  description: A purchasable variant of a product; SKU is unique within a brand.
+  key_fields: [sku, price, compare_at_price, inventory_quantity, weight, barcode]
+- name: ProductImage
+  key: position
+  description: A product image with source URL, alt text, and display order.
+  key_fields: [src, alt, position]
+relationships:
+- from: Product
+  to: ProductVariant
+  type: has_many
+  via: variants
+  required: true
+  notes: At least one variant is required to create a product.
+- from: Product
+  to: ProductImage
+  type: has_many
+  via: images
+- from: ProductVariant
+  to: Product
+  type: belongs_to
+  via: sku
+  notes: Inventory updates target a product_id + variant SKU pair.

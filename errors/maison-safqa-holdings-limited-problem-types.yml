@@ -1,0 +1,73 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/maison-safqa-holdings-limited-openapi-original.yml
+docs: https://developer.maisonsafqa.com/getting-started
+format: custom
+envelope:
+  description: >-
+    Errors are returned as a JSON object with a single top-level `error` key holding a structured
+    ApiError object (`field` + `message`). This is NOT RFC 9457 application/problem+json. Bulk
+    operations return per-item `failed[]` entries each carrying an `errors[]` list of ApiError
+    objects, and use HTTP 207 Multi-Status for partial success.
+  shape: '{ "error": { "field": string, "message": string } }'
+  content_type: application/json
+problems:
+- status: 400
+  title: Bad Request
+  description: Validation errors or duplicate SKUs within the brand.
+  remediation: Fix the offending field named in error.field; SKUs must be unique per brand.
+  source_operations:
+  - POST /products
+  - PUT /products/{product_id}
+  - POST /products/bulk
+  - PATCH /products/{product_id}/inventory
+  - PATCH /inventory/bulk
+- status: 401
+  title: Unauthorized
+  description: Invalid or missing API key.
+  remediation: Send a valid X-MaisonSafqa-Api-Key header matching the environment (ms_test_ / ms_live_).
+  source_operations:
+  - POST /products
+  - GET /products/{product_id}
+  - PUT /products/{product_id}
+  - POST /products/bulk
+  - PATCH /products/{product_id}/inventory
+  - PATCH /inventory/bulk
+- status: 403
+  title: Forbidden
+  description: Access denied to the requested resource.
+  source_operations:
+  - POST /products
+  - PATCH /products/{product_id}/inventory
+- status: 404
+  title: Not Found
+  description: Product does not exist or does not belong to the authenticated brand.
+  source_operations:
+  - GET /products/{product_id}
+  - PUT /products/{product_id}
+  - PATCH /products/{product_id}/inventory
+- status: 207
+  title: Multi-Status
+  description: Partial success in a bulk operation; inspect created[]/failed[] or results[].
+  source_operations:
+  - POST /products/bulk
+  - PATCH /inventory/bulk
+- status: 429
+  title: Too Many Requests
+  description: Rate limit exceeded; a Retry-After header indicates seconds to wait.
+  remediation: Back off for Retry-After seconds; stay under 300 requests/minute.
+  source_operations:
+  - POST /products
+  - GET /products/{product_id}
+  - PUT /products/{product_id}
+  - POST /products/bulk
+  - PATCH /products/{product_id}/inventory
+  - PATCH /inventory/bulk
+- status: 500
+  title: Internal Server Error
+  description: An unexpected server error occurred.
+  source_operations:
+  - POST /products
+  - GET /products/{product_id}
+  - PUT /products/{product_id}
+  - PATCH /products/{product_id}/inventory

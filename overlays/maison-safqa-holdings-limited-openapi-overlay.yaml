@@ -1,0 +1,31 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Maison Safqa Brand Developer API
+  version: 1.0.0
+extends: openapi/maison-safqa-holdings-limited-openapi-original.yml
+actions:
+- target: $.info
+  update:
+    x-apievangelist-enriched: '2026-07-20'
+    x-api-category: Retail / Product Catalog
+    description: >-
+      Brand-facing API for pushing product catalog and inventory data into the Maison Safqa platform,
+      which syncs approved products to Shopify. Authenticated with an environment-scoped API key.
+- target: $.paths['/products'].post
+  update:
+    operationId: createProduct
+- target: $.paths['/products/{product_id}'].get
+  update:
+    operationId: getProduct
+- target: $.paths['/products/{product_id}'].put
+  update:
+    operationId: updateProduct
+- target: $.paths['/products/bulk'].post
+  update:
+    operationId: bulkCreateProducts
+- target: $.paths['/products/{product_id}/inventory'].patch
+  update:
+    operationId: updateProductInventory
+- target: $.paths['/inventory/bulk'].patch
+  update:
+    operationId: bulkUpdateInventory

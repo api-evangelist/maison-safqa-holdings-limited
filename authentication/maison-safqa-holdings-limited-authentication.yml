@@ -1,0 +1,18 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/maison-safqa-holdings-limited-openapi-original.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: ApiKeyAuth
+  type: apiKey
+  in: header
+  parameter: X-MaisonSafqa-Api-Key
+  description: API key for authentication. Use 'ms_test_...' keys for development/testing and
+    'ms_live_...' keys for production. Keys are environment-specific and will only work in their
+    respective environments.
+  sources:
+  - openapi/maison-safqa-holdings-limited-openapi-original.yml

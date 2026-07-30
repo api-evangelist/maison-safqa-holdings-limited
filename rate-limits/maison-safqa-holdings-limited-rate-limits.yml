@@ -1,0 +1,34 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+provider: Maison Safqa Holdings Limited
+providerId: maison-safqa-holdings-limited
+generated: '2026-07-20'
+method: searched
+source: https://developer.maisonsafqa.com/getting-started
+created: '2026-07-20'
+modified: '2026-07-20'
+tags:
+- Rate Limiting
+- Retail
+description: The Maison Safqa Brand Developer API enforces a fixed per-minute request limit and a
+  maximum item count per bulk operation. Inventory update endpoints are noted as stricter but no
+  numeric value is published for them. Rate-limit state is signaled on every response via
+  X-RateLimit-* headers.
+headers:
+  limit: X-RateLimit-Limit
+  remaining: X-RateLimit-Remaining
+  reset: X-RateLimit-Reset
+  retryAfter: Retry-After
+responseCodes:
+  throttled: 429
+limits:
+- name: Requests per minute
+  scope: api-key
+  metric: requests_per_minute
+  limit: 300
+  timeFrame: minute
+- name: Bulk operation max items
+  scope: request
+  metric: items_per_request
+  limit: 500
+  timeFrame: request

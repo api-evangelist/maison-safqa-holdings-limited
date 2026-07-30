@@ -1,0 +1,16 @@
+{
+  "provider": "maison-safqa-holdings-limited",
+  "sources": [
+    "maison-safqa-holdings-limited-inventory-api-openapi.yml",
+    "maison-safqa-holdings-limited-products-api-openapi.yml"
+  ],
+  "outputs": [
+    "maison-safqa-holdings-limited-inventory-api-openapi.yml",
+    "maison-safqa-holdings-limited-products-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

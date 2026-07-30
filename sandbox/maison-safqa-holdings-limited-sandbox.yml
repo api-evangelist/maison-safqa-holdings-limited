@@ -1,0 +1,21 @@
+generated: '2026-07-20'
+method: searched
+source: https://developer.maisonsafqa.com/getting-started
+description: >-
+  The Maison Safqa Brand Developer API separates test and live traffic by API-key prefix. There is
+  no published magic-test-value catalog (test cards, fixtures, or time simulation); the sandbox is a
+  key-scoped environment. Products created via test keys are not synced to the live Shopify store.
+key_separation:
+  header: X-MaisonSafqa-Api-Key
+  environments:
+  - mode: test
+    key_prefix: ms_test_
+    usage: Testing and development only.
+  - mode: live
+    key_prefix: ms_live_
+    usage: Live production environment.
+  notes: >-
+    Keys are environment-specific — a test key will not work in production and vice versa. The full
+    key is shown only once at creation time. Request access via itsupport@maisonsafqa.com.
+test_values: []
+time_simulation: null

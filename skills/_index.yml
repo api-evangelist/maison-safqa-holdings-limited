@@ -1,0 +1,12 @@
+generated: '2026-07-20'
+method: generated
+source: openapi/maison-safqa-holdings-limited-openapi-original.yml
+skills:
+- file: maison-safqa-holdings-limited-onboard-catalog.md
+  name: Onboard a brand product catalog to Maison Safqa
+  api: openapi/maison-safqa-holdings-limited-openapi-original.yml
+  operations: ['POST /products', 'POST /products/bulk', 'GET /products/{product_id}']
+- file: maison-safqa-holdings-limited-sync-inventory.md
+  name: Sync inventory levels to Maison Safqa
+  api: openapi/maison-safqa-holdings-limited-openapi-original.yml
+  operations: ['PATCH /products/{product_id}/inventory', 'PATCH /inventory/bulk']
