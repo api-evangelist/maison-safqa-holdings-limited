@@ -83,6 +83,8 @@ apis:
   - type: GettingStarted
     url: https://developer.maisonsafqa.com/getting-started
 common:
+- type: Overlay
+  url: overlays/maison-safqa-holdings-limited-openapi-overlay.yaml
 - type: DeveloperPortal
   url: https://developer.maisonsafqa.com
 - type: Documentation
