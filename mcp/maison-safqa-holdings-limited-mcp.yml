@@ -2,10 +2,9 @@ generated: '2026-07-20'
 method: derived
 status: candidate
 source: openapi/maison-safqa-holdings-limited-openapi-original.yml
-description: >-
-  Candidate MCP tool surface derived one-to-one from the Maison Safqa Brand Developer API operations.
-  No official hosted/remote MCP server was found for this provider; this is a governance starting
-  point, not a published server.
+description: Candidate MCP tool surface derived one-to-one from the Maison Safqa Brand Developer API operations.
+  No official hosted/remote MCP server was found for this provider; this is a governance starting point,
+  not a published server.
 server:
   name: maison-safqa
   transport: stdio
@@ -28,3 +27,9 @@ tools:
 - name: bulk_update_inventory
   description: Update inventory for up to 500 products (PATCH /inventory/bulk).
   source_operation: openapi/maison-safqa-holdings-limited-openapi-original.yml#PATCH_/inventory/bulk
+deployment:
+  mode: none
+  verified: derived
+  tools: 6
+  checked: '2026-08-12'
+  source: catalog MCP census

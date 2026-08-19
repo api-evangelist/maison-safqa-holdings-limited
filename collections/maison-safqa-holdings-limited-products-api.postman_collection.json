@@ -1,0 +1,1505 @@
+{
+  "item": [
+    {
+      "id": "f2e231a0-0391-45cd-8a74-d5b6bcc52166",
+      "name": "Products",
+      "description": {
+        "content": "Create, retrieve, and update products. Products are created in draft status and synced to Shopify when activated.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e07cea5f-4893-4c20-928b-60ff9fdc264a",
+          "name": "Create Product",
+          "request": {
+            "name": "Create Product",
+            "description": {
+              "content": "Creates a new product in draft status. The product will be synced to Shopify when activated. SKUs must be unique within your brand.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "products"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"<string>\",\n  \"variants\": [\n    {\n      \"title\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"price\": \"<number>\",\n      \"inventory_quantity\": \"<integer>\",\n      \"compare_at_price\": \"<number>\",\n      \"weight\": \"<number>\",\n      \"weight_unit\": \"kg\",\n      \"barcode\": \"<string>\",\n      \"requires_shipping\": true,\n      \"taxable\": true\n    }\n  ],\n  \"body_html\": \"<string>\",\n  \"vendor\": \"<string>\",\n  \"product_type\": \"<string>\",\n  \"tags\": \"<string>\",\n  \"handle\": \"<string>\",\n  \"template_suffix\": \"<string>\",\n  \"published_scope\": \"web\",\n  \"images\": [\n    {\n      \"src\": \"<uri>\",\n      \"alt\": \"<string>\",\n      \"position\": \"<integer>\"\n    },\n    {\n      \"src\": \"<uri>\",\n      \"alt\": \"<string>\",\n      \"position\": \"<integer>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8ed365de-fed9-4623-996d-53926b2a75a4",
+              "name": "Product created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-MaisonSafqa-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"<string>\",\n  \"variants\": [\n    {\n      \"title\": \"string\",\n      \"sku\": \"2n-G\",\n      \"price\": 1660.2428476997754,\n      \"inventory_quantity\": 9290,\n      \"compare_at_price\": 6053.605111329626,\n      \"weight\": 8282.649962051672,\n      \"weight_unit\": \"kg\",\n      \"barcode\": \"string\",\n      \"requires_shipping\": true,\n      \"taxable\": true\n    }\n  ],\n  \"body_html\": \"<string>\",\n  \"vendor\": \"<string>\",\n  \"product_type\": \"<string>\",\n  \"tags\": \"<string>\",\n  \"handle\": \"<string>\",\n  \"template_suffix\": \"<string>\",\n  \"published_scope\": \"web\",\n  \"images\": [\n    {\n      \"src\": \"http://gEqfkwsANZaZiKcixGUZiWujBRdlxqx.jprF-DMFz4EKwZHdFQLzB2c,yCj-IT8crO7XVnjhkBNtQk6UsB10U\",\n      \"alt\": \"string\",\n      \"position\": 51\n    },\n    {\n      \"src\": \"https://axSaqPruwgxwZwJomDZeuNuIql.yelC990KPBUyusTW-L.lcMyx,fcH9goQatURwym1JbcGbS,R9RSKo\",\n      \"alt\": \"string\",\n      \"position\": 21\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unix timestamp when rate limit resets",
+                  "key": "X-RateLimit-Reset",
+                  "value": "5161"
+                },
+                {
+                  "disabled": false,
+                  "description": "Requests remaining in current window",
+                  "key": "X-RateLimit-Remaining",
+                  "value": "5161"
+                },
+                {
+                  "disabled": false,
+                  "description": "Maximum requests allowed per minute",
+                  "key": "X-RateLimit-Limit",
+                  "value": "5161"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": null,\n  \"product\": null,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e4d48a2f-1254-4944-93c3-07fabe4335dc",
+              "name": "Validation errors or duplicate SKUs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-MaisonSafqa-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"<string>\",\n  \"variants\": [\n    {\n      \"title\": \"string\",\n      \"sku\": \"2n-G\",\n      \"price\": 1660.2428476997754,\n      \"inventory_quantity\": 9290,\n      \"compare_at_price\": 6053.605111329626,\n      \"weight\": 8282.649962051672,\n      \"weight_unit\": \"kg\",\n      \"barcode\": \"string\",\n      \"requires_shipping\": true,\n      \"taxable\": true\n    }\n  ],\n  \"body_html\": \"<string>\",\n  \"vendor\": \"<string>\",\n  \"product_type\": \"<string>\",\n  \"tags\": \"<string>\",\n  \"handle\": \"<string>\",\n  \"template_suffix\": \"<string>\",\n  \"published_scope\": \"web\",\n  \"images\": [\n    {\n      \"src\": \"http://gEqfkwsANZaZiKcixGUZiWujBRdlxqx.jprF-DMFz4EKwZHdFQLzB2c,yCj-IT8crO7XVnjhkBNtQk6UsB10U\",\n      \"alt\": \"string\",\n      \"position\": 51\n    },\n    {\n      \"src\": \"https://axSaqPruwgxwZwJomDZeuNuIql.yelC990KPBUyusTW-L.lcMyx,fcH9goQatURwym1JbcGbS,R9RSKo\",\n      \"alt\": \"string\",\n      \"position\": 21\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"field\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "82db6d7e-3a45-48fc-8d22-bc0300229de4",
+              "name": "Unauthorized - Invalid or missing API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-MaisonSafqa-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"<string>\",\n  \"variants\": [\n    {\n      \"title\": \"string\",\n      \"sku\": \"2n-G\",\n      \"price\": 1660.2428476997754,\n      \"inventory_quantity\": 9290,\n      \"compare_at_price\": 6053.605111329626,\n      \"weight\": 8282.649962051672,\n      \"weight_unit\": \"kg\",\n      \"barcode\": \"string\",\n      \"requires_shipping\": true,\n      \"taxable\": true\n    }\n  ],\n  \"body_html\": \"<string>\",\n  \"vendor\": \"<string>\",\n  \"product_type\": \"<string>\",\n  \"tags\": \"<string>\",\n  \"handle\": \"<string>\",\n  \"template_suffix\": \"<string>\",\n  \"published_scope\": \"web\",\n  \"images\": [\n    {\n      \"src\": \"http://gEqfkwsANZaZiKcixGUZiWujBRdlxqx.jprF-DMFz4EKwZHdFQLzB2c,yCj-IT8crO7XVnjhkBNtQk6UsB10U\",\n      \"alt\": \"string\",\n      \"position\": 51\n    },\n    {\n      \"src\": \"https://axSaqPruwgxwZwJomDZeuNuIql.yelC990KPBUyusTW-L.lcMyx,fcH9goQatURwym1JbcGbS,R9RSKo\",\n      \"alt\": \"string\",\n      \"position\": 21\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"field\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "904d1825-869d-4dfd-998a-28098a8f00db",
+              "name": "Forbidden - Access denied",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-MaisonSafqa-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"<string>\",\n  \"variants\": [\n    {\n      \"title\": \"string\",\n      \"sku\": \"2n-G\",\n      \"price\": 1660.2428476997754,\n      \"inventory_quantity\": 9290,\n      \"compare_at_price\": 6053.605111329626,\n      \"weight\": 8282.649962051672,\n      \"weight_unit\": \"kg\",\n      \"barcode\": \"string\",\n      \"requires_shipping\": true,\n      \"taxable\": true\n    }\n  ],\n  \"body_html\": \"<string>\",\n  \"vendor\": \"<string>\",\n  \"product_type\": \"<string>\",\n  \"tags\": \"<string>\",\n  \"handle\": \"<string>\",\n  \"template_suffix\": \"<string>\",\n  \"published_scope\": \"web\",\n  \"images\": [\n    {\n      \"src\": \"http://gEqfkwsANZaZiKcixGUZiWujBRdlxqx.jprF-DMFz4EKwZHdFQLzB2c,yCj-IT8crO7XVnjhkBNtQk6UsB10U\",\n      \"alt\": \"string\",\n      \"position\": 51\n    },\n    {\n      \"src\": \"https://axSaqPruwgxwZwJomDZeuNuIql.yelC990KPBUyusTW-L.lcMyx,fcH9goQatURwym1JbcGbS,R9RSKo\",\n      \"alt\": \"string\",\n      \"position\": 21\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"field\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7d9744b3-7063-4b0e-922a-479b6da66b3e",
+              "name": "Rate limit exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-MaisonSafqa-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"<string>\",\n  \"variants\": [\n    {\n      \"title\": \"string\",\n      \"sku\": \"2n-G\",\n      \"price\": 1660.2428476997754,\n      \"inventory_quantity\": 9290,\n      \"compare_at_price\": 6053.605111329626,\n      \"weight\": 8282.649962051672,\n      \"weight_unit\": \"kg\",\n      \"barcode\": \"string\",\n      \"requires_shipping\": true,\n      \"taxable\": true\n    }\n  ],\n  \"body_html\": \"<string>\",\n  \"vendor\": \"<string>\",\n  \"product_type\": \"<string>\",\n  \"tags\": \"<string>\",\n  \"handle\": \"<string>\",\n  \"template_suffix\": \"<string>\",\n  \"published_scope\": \"web\",\n  \"images\": [\n    {\n      \"src\": \"http://gEqfkwsANZaZiKcixGUZiWujBRdlxqx.jprF-DMFz4EKwZHdFQLzB2c,yCj-IT8crO7XVnjhkBNtQk6UsB10U\",\n      \"alt\": \"string\",\n      \"position\": 51\n    },\n    {\n      \"src\": \"https://axSaqPruwgxwZwJomDZeuNuIql.yelC990KPBUyusTW-L.lcMyx,fcH9goQatURwym1JbcGbS,R9RSKo\",\n      \"alt\": \"string\",\n      \"position\": 21\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Seconds to wait before retrying",
+                  "key": "Retry-After",
+                  "value": "5161"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"field\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "25e59392-7a92-496f-8e6e-f8eb84588a54",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-MaisonSafqa-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"<string>\",\n  \"variants\": [\n    {\n      \"title\": \"string\",\n      \"sku\": \"2n-G\",\n      \"price\": 1660.2428476997754,\n      \"inventory_quantity\": 9290,\n      \"compare_at_price\": 6053.605111329626,\n      \"weight\": 8282.649962051672,\n      \"weight_unit\": \"kg\",\n      \"barcode\": \"string\",\n      \"requires_shipping\": true,\n      \"taxable\": true\n    }\n  ],\n  \"body_html\": \"<string>\",\n  \"vendor\": \"<string>\",\n  \"product_type\": \"<string>\",\n  \"tags\": \"<string>\",\n  \"handle\": \"<string>\",\n  \"template_suffix\": \"<string>\",\n  \"published_scope\": \"web\",\n  \"images\": [\n    {\n      \"src\": \"http://gEqfkwsANZaZiKcixGUZiWujBRdlxqx.jprF-DMFz4EKwZHdFQLzB2c,yCj-IT8crO7XVnjhkBNtQk6UsB10U\",\n      \"alt\": \"string\",\n      \"position\": 51\n    },\n    {\n      \"src\": \"https://axSaqPruwgxwZwJomDZeuNuIql.yelC990KPBUyusTW-L.lcMyx,fcH9goQatURwym1JbcGbS,R9RSKo\",\n      \"alt\": \"string\",\n      \"position\": 21\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"field\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "88184153-8626-4e40-b970-79722b7050bd",
+          "name": "Get Product",
+          "request": {
+            "name": "Get Product",
+            "description": {
+              "content": "Retrieves a specific product by its product_id. Only products belonging to the authenticated brand can be accessed.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "products",
+                ":product_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "product_id",
+                  "description": "(Required) Product identifier (format: product_XXXXXXXXXXXXXXXX)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "eebbac02-306b-4561-ac3e-7fbf9e2d3b8d",
+              "name": "Product retrieved successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ":product_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "product_id",
+                      "description": "(Required) Product identifier (format: product_XXXXXXXXXXXXXXXX)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-MaisonSafqa-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unix timestamp when rate limit resets",
+                  "key": "X-RateLimit-Reset",
+                  "value": "5161"
+                },
+                {
+                  "disabled": false,
+                  "description": "Requests remaining in current window",
+                  "key": "X-RateLimit-Remaining",
+                  "value": "5161"
+                },
+                {
+                  "disabled": false,
+                  "description": "Maximum requests allowed per minute (300)",
+                  "key": "X-RateLimit-Limit",
+                  "value": "5161"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": null,\n  \"product\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "338dd557-756a-4398-84d7-297e147316e2",
+              "name": "Unauthorized - Invalid or missing API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ":product_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "product_id",
+                      "description": "(Required) Product identifier (format: product_XXXXXXXXXXXXXXXX)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-MaisonSafqa-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"field\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cc93ee76-46a7-46a9-bb3d-7e7353164139",
+              "name": "Product not found or does not belong to your brand",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ":product_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "product_id",
+                      "description": "(Required) Product identifier (format: product_XXXXXXXXXXXXXXXX)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-MaisonSafqa-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"field\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "31bf2f2f-96b7-4f32-8f08-1cc709be2893",
+              "name": "Rate limit exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ":product_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "product_id",
+                      "description": "(Required) Product identifier (format: product_XXXXXXXXXXXXXXXX)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-MaisonSafqa-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Seconds to wait before retrying",
+                  "key": "Retry-After",
+                  "value": "5161"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"field\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b64dc208-67d0-479b-bfee-6b04c0bbb0e9",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ":product_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "product_id",
+                      "description": "(Required) Product identifier (format: product_XXXXXXXXXXXXXXXX)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-MaisonSafqa-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"field\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "04665c78-3818-4391-8139-51bfd59fc5a7",
+          "name": "Update Product",
+          "request": {
+            "name": "Update Product",
+            "description": {
+              "content": "Updates an existing product. All fields are optional - only provided fields will be updated. Only products belonging to the authenticated brand can be modified.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "products",
+                ":product_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "product_id",
+                  "description": "(Required) Product identifier (format: product_XXXXXXXXXXXXXXXX)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"<string>\",\n  \"body_html\": \"<string>\",\n  \"vendor\": \"<string>\",\n  \"product_type\": \"<string>\",\n  \"tags\": \"<string>\",\n  \"handle\": \"<string>\",\n  \"template_suffix\": \"<string>\",\n  \"published_scope\": \"<string>\",\n  \"variants\": [\n    {\n      \"title\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"price\": \"<number>\",\n      \"inventory_quantity\": \"<integer>\",\n      \"compare_at_price\": \"<number>\",\n      \"weight\": \"<number>\",\n      \"weight_unit\": \"kg\",\n      \"barcode\": \"<string>\",\n      \"requires_shipping\": true,\n      \"taxable\": true\n    },\n    {\n      \"title\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"price\": \"<number>\",\n      \"inventory_quantity\": \"<integer>\",\n      \"compare_at_price\": \"<number>\",\n      \"weight\": \"<number>\",\n      \"weight_unit\": \"kg\",\n      \"barcode\": \"<string>\",\n      \"requires_shipping\": true,\n      \"taxable\": true\n    }\n  ],\n  \"images\": [\n    {\n      \"src\": \"<uri>\",\n      \"alt\": \"<string>\",\n      \"position\": \"<integer>\"\n    },\n    {\n      \"src\": \"<uri>\",\n      \"alt\": \"<string>\",\n      \"position\": \"<integer>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "35a123c7-7da0-4639-b37a-94d63a467727",
+              "name": "Product updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ":product_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "product_id",
+                      "description": "(Required) Product identifier (format: product_XXXXXXXXXXXXXXXX)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-MaisonSafqa-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"<string>\",\n  \"body_html\": \"<string>\",\n  \"vendor\": \"<string>\",\n  \"product_type\": \"<string>\",\n  \"tags\": \"<string>\",\n  \"handle\": \"<string>\",\n  \"template_suffix\": \"<string>\",\n  \"published_scope\": \"<string>\",\n  \"variants\": [\n    {\n      \"title\": \"string\",\n      \"sku\": \"jE6zhE7N\",\n      \"price\": 9825.514493685794,\n      \"inventory_quantity\": 4273,\n      \"compare_at_price\": 5688.596464625464,\n      \"weight\": 7429.448245023118,\n      \"weight_unit\": \"kg\",\n      \"barcode\": \"string\",\n      \"requires_shipping\": true,\n      \"taxable\": true\n    },\n    {\n      \"title\": \"string\",\n      \"sku\": \"-ntMym6v\",\n      \"price\": 2117.0009904785593,\n      \"inventory_quantity\": 6165,\n      \"compare_at_price\": 3440.2408750684476,\n      \"weight\": 359.83222747718037,\n      \"weight_unit\": \"kg\",\n      \"barcode\": \"string\",\n      \"requires_shipping\": true,\n      \"taxable\": true\n    }\n  ],\n  \"images\": [\n    {\n      \"src\": \"https://cUCrGxfFyRfelFhzJaxlxaqsB.ieskIoqr0PD,dBRUBv.1nPVgwbf7mkXjNSlONFkol,29eGrOFX6\",\n      \"alt\": \"string\",\n      \"position\": 51\n    },\n    {\n      \"src\": \"https://NJzixEvFEhZyelAonhRuPxDLLLbGXuzVv.nuikpn5FAEEnpjlsdwMJxbzqOh-VOK59CpeITF6klXB9dlWrpFrvwavlN84\",\n      \"alt\": \"string\",\n      \"position\": 5\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unix timestamp when rate limit resets",
+                  "key": "X-RateLimit-Reset",
+                  "value": "5161"
+                },
+                {
+                  "disabled": false,
+                  "description": "Requests remaining in current window",
+                  "key": "X-RateLimit-Remaining",
+                  "value": "5161"
+                },
+                {
+                  "disabled": false,
+                  "description": "Maximum requests allowed per minute (300)",
+                  "key": "X-RateLimit-Limit",
+                  "value": "5161"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": null,\n  \"product\": null,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8f11ac3f-ea27-4f40-aae5-22c64c0fff88",
+              "name": "Validation errors or duplicate SKUs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ":product_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "product_id",
+                      "description": "(Required) Product identifier (format: product_XXXXXXXXXXXXXXXX)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-MaisonSafqa-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"<string>\",\n  \"body_html\": \"<string>\",\n  \"vendor\": \"<string>\",\n  \"product_type\": \"<string>\",\n  \"tags\": \"<string>\",\n  \"handle\": \"<string>\",\n  \"template_suffix\": \"<string>\",\n  \"published_scope\": \"<string>\",\n  \"variants\": [\n    {\n      \"title\": \"string\",\n      \"sku\": \"jE6zhE7N\",\n      \"price\": 9825.514493685794,\n      \"inventory_quantity\": 4273,\n      \"compare_at_price\": 5688.596464625464,\n      \"weight\": 7429.448245023118,\n      \"weight_unit\": \"kg\",\n      \"barcode\": \"string\",\n      \"requires_shipping\": true,\n      \"taxable\": true\n    },\n    {\n      \"title\": \"string\",\n      \"sku\": \"-ntMym6v\",\n      \"price\": 2117.0009904785593,\n      \"inventory_quantity\": 6165,\n      \"compare_at_price\": 3440.2408750684476,\n      \"weight\": 359.83222747718037,\n      \"weight_unit\": \"kg\",\n      \"barcode\": \"string\",\n      \"requires_shipping\": true,\n      \"taxable\": true\n    }\n  ],\n  \"images\": [\n    {\n      \"src\": \"https://cUCrGxfFyRfelFhzJaxlxaqsB.ieskIoqr0PD,dBRUBv.1nPVgwbf7mkXjNSlONFkol,29eGrOFX6\",\n      \"alt\": \"string\",\n      \"position\": 51\n    },\n    {\n      \"src\": \"https://NJzixEvFEhZyelAonhRuPxDLLLbGXuzVv.nuikpn5FAEEnpjlsdwMJxbzqOh-VOK59CpeITF6klXB9dlWrpFrvwavlN84\",\n      \"alt\": \"string\",\n      \"position\": 5\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"field\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dd8b144e-377b-40bb-adf0-70f6ff12a225",
+              "name": "Unauthorized - Invalid or missing API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ":product_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "product_id",
+                      "description": "(Required) Product identifier (format: product_XXXXXXXXXXXXXXXX)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-MaisonSafqa-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"<string>\",\n  \"body_html\": \"<string>\",\n  \"vendor\": \"<string>\",\n  \"product_type\": \"<string>\",\n  \"tags\": \"<string>\",\n  \"handle\": \"<string>\",\n  \"template_suffix\": \"<string>\",\n  \"published_scope\": \"<string>\",\n  \"variants\": [\n    {\n      \"title\": \"string\",\n      \"sku\": \"jE6zhE7N\",\n      \"price\": 9825.514493685794,\n      \"inventory_quantity\": 4273,\n      \"compare_at_price\": 5688.596464625464,\n      \"weight\": 7429.448245023118,\n      \"weight_unit\": \"kg\",\n      \"barcode\": \"string\",\n      \"requires_shipping\": true,\n      \"taxable\": true\n    },\n    {\n      \"title\": \"string\",\n      \"sku\": \"-ntMym6v\",\n      \"price\": 2117.0009904785593,\n      \"inventory_quantity\": 6165,\n      \"compare_at_price\": 3440.2408750684476,\n      \"weight\": 359.83222747718037,\n      \"weight_unit\": \"kg\",\n      \"barcode\": \"string\",\n      \"requires_shipping\": true,\n      \"taxable\": true\n    }\n  ],\n  \"images\": [\n    {\n      \"src\": \"https://cUCrGxfFyRfelFhzJaxlxaqsB.ieskIoqr0PD,dBRUBv.1nPVgwbf7mkXjNSlONFkol,29eGrOFX6\",\n      \"alt\": \"string\",\n      \"position\": 51\n    },\n    {\n      \"src\": \"https://NJzixEvFEhZyelAonhRuPxDLLLbGXuzVv.nuikpn5FAEEnpjlsdwMJxbzqOh-VOK59CpeITF6klXB9dlWrpFrvwavlN84\",\n      \"alt\": \"string\",\n      \"position\": 5\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"field\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7b462daa-50f2-427f-8ed0-2a790f062e55",
+              "name": "Product not found or does not belong to your brand",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ":product_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "product_id",
+                      "description": "(Required) Product identifier (format: product_XXXXXXXXXXXXXXXX)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-MaisonSafqa-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"<string>\",\n  \"body_html\": \"<string>\",\n  \"vendor\": \"<string>\",\n  \"product_type\": \"<string>\",\n  \"tags\": \"<string>\",\n  \"handle\": \"<string>\",\n  \"template_suffix\": \"<string>\",\n  \"published_scope\": \"<string>\",\n  \"variants\": [\n    {\n      \"title\": \"string\",\n      \"sku\": \"jE6zhE7N\",\n      \"price\": 9825.514493685794,\n      \"inventory_quantity\": 4273,\n      \"compare_at_price\": 5688.596464625464,\n      \"weight\": 7429.448245023118,\n      \"weight_unit\": \"kg\",\n      \"barcode\": \"string\",\n      \"requires_shipping\": true,\n      \"taxable\": true\n    },\n    {\n      \"title\": \"string\",\n      \"sku\": \"-ntMym6v\",\n      \"price\": 2117.0009904785593,\n      \"inventory_quantity\": 6165,\n      \"compare_at_price\": 3440.2408750684476,\n      \"weight\": 359.83222747718037,\n      \"weight_unit\": \"kg\",\n      \"barcode\": \"string\",\n      \"requires_shipping\": true,\n      \"taxable\": true\n    }\n  ],\n  \"images\": [\n    {\n      \"src\": \"https://cUCrGxfFyRfelFhzJaxlxaqsB.ieskIoqr0PD,dBRUBv.1nPVgwbf7mkXjNSlONFkol,29eGrOFX6\",\n      \"alt\": \"string\",\n      \"position\": 51\n    },\n    {\n      \"src\": \"https://NJzixEvFEhZyelAonhRuPxDLLLbGXuzVv.nuikpn5FAEEnpjlsdwMJxbzqOh-VOK59CpeITF6klXB9dlWrpFrvwavlN84\",\n      \"alt\": \"string\",\n      \"position\": 5\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"field\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fcf391db-f1c4-464c-a614-c76be59ab2ff",
+              "name": "Rate limit exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ":product_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "product_id",
+                      "description": "(Required) Product identifier (format: product_XXXXXXXXXXXXXXXX)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-MaisonSafqa-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"<string>\",\n  \"body_html\": \"<string>\",\n  \"vendor\": \"<string>\",\n  \"product_type\": \"<string>\",\n  \"tags\": \"<string>\",\n  \"handle\": \"<string>\",\n  \"template_suffix\": \"<string>\",\n  \"published_scope\": \"<string>\",\n  \"variants\": [\n    {\n      \"title\": \"string\",\n      \"sku\": \"jE6zhE7N\",\n      \"price\": 9825.514493685794,\n      \"inventory_quantity\": 4273,\n      \"compare_at_price\": 5688.596464625464,\n      \"weight\": 7429.448245023118,\n      \"weight_unit\": \"kg\",\n      \"barcode\": \"string\",\n      \"requires_shipping\": true,\n      \"taxable\": true\n    },\n    {\n      \"title\": \"string\",\n      \"sku\": \"-ntMym6v\",\n      \"price\": 2117.0009904785593,\n      \"inventory_quantity\": 6165,\n      \"compare_at_price\": 3440.2408750684476,\n      \"weight\": 359.83222747718037,\n      \"weight_unit\": \"kg\",\n      \"barcode\": \"string\",\n      \"requires_shipping\": true,\n      \"taxable\": true\n    }\n  ],\n  \"images\": [\n    {\n      \"src\": \"https://cUCrGxfFyRfelFhzJaxlxaqsB.ieskIoqr0PD,dBRUBv.1nPVgwbf7mkXjNSlONFkol,29eGrOFX6\",\n      \"alt\": \"string\",\n      \"position\": 51\n    },\n    {\n      \"src\": \"https://NJzixEvFEhZyelAonhRuPxDLLLbGXuzVv.nuikpn5FAEEnpjlsdwMJxbzqOh-VOK59CpeITF6klXB9dlWrpFrvwavlN84\",\n      \"alt\": \"string\",\n      \"position\": 5\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Seconds to wait before retrying",
+                  "key": "Retry-After",
+                  "value": "5161"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"field\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c5d7e837-0417-494e-8a66-52821bbebe4a",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ":product_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "product_id",
+                      "description": "(Required) Product identifier (format: product_XXXXXXXXXXXXXXXX)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-MaisonSafqa-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"<string>\",\n  \"body_html\": \"<string>\",\n  \"vendor\": \"<string>\",\n  \"product_type\": \"<string>\",\n  \"tags\": \"<string>\",\n  \"handle\": \"<string>\",\n  \"template_suffix\": \"<string>\",\n  \"published_scope\": \"<string>\",\n  \"variants\": [\n    {\n      \"title\": \"string\",\n      \"sku\": \"jE6zhE7N\",\n      \"price\": 9825.514493685794,\n      \"inventory_quantity\": 4273,\n      \"compare_at_price\": 5688.596464625464,\n      \"weight\": 7429.448245023118,\n      \"weight_unit\": \"kg\",\n      \"barcode\": \"string\",\n      \"requires_shipping\": true,\n      \"taxable\": true\n    },\n    {\n      \"title\": \"string\",\n      \"sku\": \"-ntMym6v\",\n      \"price\": 2117.0009904785593,\n      \"inventory_quantity\": 6165,\n      \"compare_at_price\": 3440.2408750684476,\n      \"weight\": 359.83222747718037,\n      \"weight_unit\": \"kg\",\n      \"barcode\": \"string\",\n      \"requires_shipping\": true,\n      \"taxable\": true\n    }\n  ],\n  \"images\": [\n    {\n      \"src\": \"https://cUCrGxfFyRfelFhzJaxlxaqsB.ieskIoqr0PD,dBRUBv.1nPVgwbf7mkXjNSlONFkol,29eGrOFX6\",\n      \"alt\": \"string\",\n      \"position\": 51\n    },\n    {\n      \"src\": \"https://NJzixEvFEhZyelAonhRuPxDLLLbGXuzVv.nuikpn5FAEEnpjlsdwMJxbzqOh-VOK59CpeITF6klXB9dlWrpFrvwavlN84\",\n      \"alt\": \"string\",\n      \"position\": 5\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"field\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c9f5d03f-b491-4b33-a649-50df1bc057d4",
+          "name": "Bulk Create Products",
+          "request": {
+            "name": "Bulk Create Products",
+            "description": {
+              "content": "Creates multiple products in a single request. Maximum 500 products per request. Partial success is supported - valid products will be created even if some fail validation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "products",
+                "bulk"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"products\": [\n    {\n      \"title\": \"<string>\",\n      \"variants\": [\n        {\n          \"title\": \"<string>\",\n          \"sku\": \"<string>\",\n          \"price\": \"<number>\",\n          \"inventory_quantity\": \"<integer>\",\n          \"compare_at_price\": \"<number>\",\n          \"weight\": \"<number>\",\n          \"weight_unit\": \"kg\",\n          \"barcode\": \"<string>\",\n          \"requires_shipping\": true,\n          \"taxable\": true\n        }\n      ],\n      \"body_html\": \"<string>\",\n      \"vendor\": \"<string>\",\n      \"product_type\": \"<string>\",\n      \"tags\": \"<string>\",\n      \"handle\": \"<string>\",\n      \"template_suffix\": \"<string>\",\n      \"published_scope\": \"web\",\n      \"images\": [\n        {\n          \"src\": \"<uri>\",\n          \"alt\": \"<string>\",\n          \"position\": \"<integer>\"\n        },\n        {\n          \"src\": \"<uri>\",\n          \"alt\": \"<string>\",\n          \"position\": \"<integer>\"\n        }\n      ]\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bb1daecb-39ab-4d92-ad23-29df7ccf15c9",
+              "name": "All products created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-MaisonSafqa-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"products\": [\n    {\n      \"title\": \"string\",\n      \"variants\": [\n        {\n          \"title\": \"string\",\n          \"sku\": \"DGmp0-\",\n          \"price\": 5963.439200351369,\n          \"inventory_quantity\": 8756,\n          \"compare_at_price\": 3615.777455995186,\n          \"weight\": 125.96222272679869,\n          \"weight_unit\": \"kg\",\n          \"barcode\": \"string\",\n          \"requires_shipping\": true,\n          \"taxable\": true\n        }\n      ],\n      \"body_html\": \"string\",\n      \"vendor\": \"string\",\n      \"product_type\": \"string\",\n      \"tags\": \"string\",\n      \"handle\": \"68of1wl\",\n      \"template_suffix\": \"string\",\n      \"published_scope\": \"web\",\n      \"images\": [\n        {\n          \"src\": \"http://xgLPiERHcSXQXUnIZthAzBVMCuub.yzGN8KtwjdWxG5\",\n          \"alt\": \"string\",\n          \"position\": 22\n        },\n        {\n          \"src\": \"http://tNgaYsuANrp.yetN89Y20jhjoLsMRugHJdq7NpD6sD3xnd-EsPK9wPeU\",\n          \"alt\": \"string\",\n          \"position\": 49\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\",\n  \"created\": [\n    {\n      \"product_id\": \"string\",\n      \"title\": \"string\"\n    },\n    {\n      \"product_id\": \"string\",\n      \"title\": \"string\"\n    }\n  ],\n  \"failed\": [\n    {\n      \"index\": 7941,\n      \"title\": \"string\",\n      \"errors\": [\n        {\n          \"field\": \"string\",\n          \"message\": \"string\"\n        },\n        {\n          \"field\": \"string\",\n          \"message\": \"string\"\n        }\n      ]\n    },\n    {\n      \"index\": 5937,\n      \"title\": \"string\",\n      \"errors\": [\n        {\n          \"field\": \"string\",\n          \"message\": \"string\"\n        },\n        {\n          \"field\": \"string\",\n          \"message\": \"string\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ac6a46fd-e64b-4d8f-8a7e-1ae5e217c914",
+              "name": "Partial success - some products created, some failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-MaisonSafqa-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"products\": [\n    {\n      \"title\": \"string\",\n      \"variants\": [\n        {\n          \"title\": \"string\",\n          \"sku\": \"DGmp0-\",\n          \"price\": 5963.439200351369,\n          \"inventory_quantity\": 8756,\n          \"compare_at_price\": 3615.777455995186,\n          \"weight\": 125.96222272679869,\n          \"weight_unit\": \"kg\",\n          \"barcode\": \"string\",\n          \"requires_shipping\": true,\n          \"taxable\": true\n        }\n      ],\n      \"body_html\": \"string\",\n      \"vendor\": \"string\",\n      \"product_type\": \"string\",\n      \"tags\": \"string\",\n      \"handle\": \"68of1wl\",\n      \"template_suffix\": \"string\",\n      \"published_scope\": \"web\",\n      \"images\": [\n        {\n          \"src\": \"http://xgLPiERHcSXQXUnIZthAzBVMCuub.yzGN8KtwjdWxG5\",\n          \"alt\": \"string\",\n          \"position\": 22\n        },\n        {\n          \"src\": \"http://tNgaYsuANrp.yetN89Y20jhjoLsMRugHJdq7NpD6sD3xnd-EsPK9wPeU\",\n          \"alt\": \"string\",\n          \"position\": 49\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Multi-Status (WebDAV) (RFC 4918)",
+              "code": 207,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\",\n  \"created\": [\n    {\n      \"product_id\": \"string\",\n      \"title\": \"string\"\n    },\n    {\n      \"product_id\": \"string\",\n      \"title\": \"string\"\n    }\n  ],\n  \"failed\": [\n    {\n      \"index\": 7941,\n      \"title\": \"string\",\n      \"errors\": [\n        {\n          \"field\": \"string\",\n          \"message\": \"string\"\n        },\n        {\n          \"field\": \"string\",\n          \"message\": \"string\"\n        }\n      ]\n    },\n    {\n      \"index\": 5937,\n      \"title\": \"string\",\n      \"errors\": [\n        {\n          \"field\": \"string\",\n          \"message\": \"string\"\n        },\n        {\n          \"field\": \"string\",\n          \"message\": \"string\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ba2f8e74-26bc-4842-aaf8-cb447c56dfd1",
+              "name": "Validation errors",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-MaisonSafqa-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"products\": [\n    {\n      \"title\": \"string\",\n      \"variants\": [\n        {\n          \"title\": \"string\",\n          \"sku\": \"DGmp0-\",\n          \"price\": 5963.439200351369,\n          \"inventory_quantity\": 8756,\n          \"compare_at_price\": 3615.777455995186,\n          \"weight\": 125.96222272679869,\n          \"weight_unit\": \"kg\",\n          \"barcode\": \"string\",\n          \"requires_shipping\": true,\n          \"taxable\": true\n        }\n      ],\n      \"body_html\": \"string\",\n      \"vendor\": \"string\",\n      \"product_type\": \"string\",\n      \"tags\": \"string\",\n      \"handle\": \"68of1wl\",\n      \"template_suffix\": \"string\",\n      \"published_scope\": \"web\",\n      \"images\": [\n        {\n          \"src\": \"http://xgLPiERHcSXQXUnIZthAzBVMCuub.yzGN8KtwjdWxG5\",\n          \"alt\": \"string\",\n          \"position\": 22\n        },\n        {\n          \"src\": \"http://tNgaYsuANrp.yetN89Y20jhjoLsMRugHJdq7NpD6sD3xnd-EsPK9wPeU\",\n          \"alt\": \"string\",\n          \"position\": 49\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"field\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bb29a9f1-80ce-4b69-8e13-9fde7d651e0c",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-MaisonSafqa-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"products\": [\n    {\n      \"title\": \"string\",\n      \"variants\": [\n        {\n          \"title\": \"string\",\n          \"sku\": \"DGmp0-\",\n          \"price\": 5963.439200351369,\n          \"inventory_quantity\": 8756,\n          \"compare_at_price\": 3615.777455995186,\n          \"weight\": 125.96222272679869,\n          \"weight_unit\": \"kg\",\n          \"barcode\": \"string\",\n          \"requires_shipping\": true,\n          \"taxable\": true\n        }\n      ],\n      \"body_html\": \"string\",\n      \"vendor\": \"string\",\n      \"product_type\": \"string\",\n      \"tags\": \"string\",\n      \"handle\": \"68of1wl\",\n      \"template_suffix\": \"string\",\n      \"published_scope\": \"web\",\n      \"images\": [\n        {\n          \"src\": \"http://xgLPiERHcSXQXUnIZthAzBVMCuub.yzGN8KtwjdWxG5\",\n          \"alt\": \"string\",\n          \"position\": 22\n        },\n        {\n          \"src\": \"http://tNgaYsuANrp.yetN89Y20jhjoLsMRugHJdq7NpD6sD3xnd-EsPK9wPeU\",\n          \"alt\": \"string\",\n          \"position\": 49\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"field\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "92d29bf3-9cf0-4a87-b22c-c0fa3014d037",
+              "name": "Rate limit exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-MaisonSafqa-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"products\": [\n    {\n      \"title\": \"string\",\n      \"variants\": [\n        {\n          \"title\": \"string\",\n          \"sku\": \"DGmp0-\",\n          \"price\": 5963.439200351369,\n          \"inventory_quantity\": 8756,\n          \"compare_at_price\": 3615.777455995186,\n          \"weight\": 125.96222272679869,\n          \"weight_unit\": \"kg\",\n          \"barcode\": \"string\",\n          \"requires_shipping\": true,\n          \"taxable\": true\n        }\n      ],\n      \"body_html\": \"string\",\n      \"vendor\": \"string\",\n      \"product_type\": \"string\",\n      \"tags\": \"string\",\n      \"handle\": \"68of1wl\",\n      \"template_suffix\": \"string\",\n      \"published_scope\": \"web\",\n      \"images\": [\n        {\n          \"src\": \"http://xgLPiERHcSXQXUnIZthAzBVMCuub.yzGN8KtwjdWxG5\",\n          \"alt\": \"string\",\n          \"position\": 22\n        },\n        {\n          \"src\": \"http://tNgaYsuANrp.yetN89Y20jhjoLsMRugHJdq7NpD6sD3xnd-EsPK9wPeU\",\n          \"alt\": \"string\",\n          \"position\": 49\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"field\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.maisonsafqa.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-MaisonSafqa-Api-Key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a3b504fd-7408-4988-b848-f5e24b97fba1",
+    "name": "Maison Safqa Brand Developer Inventory Products API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Update inventory quantities for product variants. Changes are stored locally and periodically synced to Shopify.",
+      "type": "text/plain"
+    }
+  }
+}

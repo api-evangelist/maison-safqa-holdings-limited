@@ -1,0 +1,64 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Maison Safqa Brand Developer Inventory API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-MaisonSafqa-Api-Key",
+      "value": "{{X-MaisonSafqa-Api-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Inventory",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Update Product Inventory",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.maisonsafqa.com/v1/products/:product_id/inventory",
+            "params": [
+              {
+                "name": "product_id",
+                "value": "",
+                "type": "path",
+                "description": "Product identifier (format: product_XXXXXXXXXXXXXXXX)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates inventory quantities for one or more variants of a product. Inventory changes are stored locally and synced to Shopify periodically. Brand data always takes precedence over Shopify data."
+        },
+        {
+          "info": {
+            "name": "Bulk Update Inventory",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.maisonsafqa.com/v1/inventory/bulk",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates inventory for multiple products in a single request. Maximum 500 products per request."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,98 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Maison Safqa Brand Developer Inventory Products API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-MaisonSafqa-Api-Key",
+      "value": "{{X-MaisonSafqa-Api-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Products",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Product",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.maisonsafqa.com/v1/products",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new product in draft status. The product will be synced to Shopify when activated. SKUs must be unique within your brand."
+        },
+        {
+          "info": {
+            "name": "Get Product",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.maisonsafqa.com/v1/products/:product_id",
+            "params": [
+              {
+                "name": "product_id",
+                "value": "",
+                "type": "path",
+                "description": "Product identifier (format: product_XXXXXXXXXXXXXXXX)"
+              }
+            ]
+          },
+          "docs": "Retrieves a specific product by its product_id. Only products belonging to the authenticated brand can be accessed."
+        },
+        {
+          "info": {
+            "name": "Update Product",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.maisonsafqa.com/v1/products/:product_id",
+            "params": [
+              {
+                "name": "product_id",
+                "value": "",
+                "type": "path",
+                "description": "Product identifier (format: product_XXXXXXXXXXXXXXXX)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing product. All fields are optional - only provided fields will be updated. Only products belonging to the authenticated brand can be modified."
+        },
+        {
+          "info": {
+            "name": "Bulk Create Products",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.maisonsafqa.com/v1/products/bulk",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates multiple products in a single request. Maximum 500 products per request. Partial success is supported - valid products will be created even if some fail validation."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
