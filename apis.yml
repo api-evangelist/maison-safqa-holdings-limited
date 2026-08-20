@@ -34,6 +34,15 @@ modified: '2026-07-20'
 tags:
 - Company
 - Retail
+- E-Commerce
+- Luxury
+- Marketplace
+- Product Catalog
+- Inventory Management
+- Shopify
+tags_raw:
+- Company
+- Retail
 - E-commerce
 - Luxury
 - Marketplace
@@ -72,6 +81,8 @@ apis:
   humanURL: https://developer.maisonsafqa.com
   baseURL: https://api.maisonsafqa.com/v1
   tags:
+  - Product
+  tags_raw:
   - Products
   properties:
   - type: OpenAPI
