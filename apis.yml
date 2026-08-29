@@ -105,6 +105,9 @@ apis:
   - type: GettingStarted
     url: https://developer.maisonsafqa.com/getting-started
 common:
+- type: CapabilityMap
+  url: capabilities/maison-safqa-holdings-limited-capability-edges.yml
+  name: Maison Safqa Holdings Limited Business Capability Map
 - type: Overlay
   url: overlays/maison-safqa-holdings-limited-openapi-overlay.yaml
 - type: DeveloperPortal

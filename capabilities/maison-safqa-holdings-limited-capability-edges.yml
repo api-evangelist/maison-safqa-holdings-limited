@@ -1,0 +1,37 @@
+slug: maison-safqa-holdings-limited
+provider: Maison Safqa Holdings Limited
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Retail & Consumer Goods
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 2
+edges:
+- tag: Inventory
+  spec_file: maison-safqa-holdings-limited-inventory-api-openapi.yml
+  capability_id: BC-530.10
+  capability_id_l1: BC-530
+  capability_name: Stock Level Management
+  confidence: 0.75
+  evidence: '''Update inventory quantities for product variants''; PATCH /products/{product_id}/inventory
+    ''Update Product Inventory''; PATCH /inventory/bulk ''Bulk Update Inventory'''
+  reason: Operations set and synchronise stock quantities per variant, which is stock level maintenance
+    across the selling platform. L2 stock level management is the closest fit; no replenishment or counting
+    logic is exposed, so confidence is moderate.
+- tag: Products
+  spec_file: maison-safqa-holdings-limited-products-api-openapi.yml
+  capability_id: BC-2370.10
+  capability_id_l1: BC-2370
+  capability_name: Item Master Data Management
+  confidence: 0.75
+  evidence: POST /products 'Create Product', PUT /products/{product_id} 'Update Product', POST /products/bulk
+    'Bulk Create Products'; schemas Product, ProductVariant, ProductImage
+  reason: Brand partners create and maintain the canonical product record (variants, images, attributes)
+    that the marketplace then sells. That is item master/product information management. Title mentions
+    Inventory but the operations are purely product record CRUD.
