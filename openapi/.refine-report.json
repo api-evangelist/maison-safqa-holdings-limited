@@ -1,8 +1,7 @@
 {
   "provider": "maison-safqa-holdings-limited",
   "sources": [
-    "maison-safqa-holdings-limited-inventory-api-openapi.yml",
-    "maison-safqa-holdings-limited-products-api-openapi.yml"
+    "_original/maison-safqa-holdings-limited-openapi-original.yml"
   ],
   "outputs": [
     "maison-safqa-holdings-limited-inventory-api-openapi.yml",
@@ -11,6 +10,13 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "maison-safqa-holdings-limited-openapi-original.yml: upgraded openapi 3.1.1 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "maison-safqa-holdings-limited-inventory-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "maison-safqa-holdings-limited-products-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
