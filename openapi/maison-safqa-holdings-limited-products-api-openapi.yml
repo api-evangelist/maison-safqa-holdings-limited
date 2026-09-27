@@ -266,43 +266,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    ProductImageResponse:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Image ID
-        src:
-          type: string
-          description: Image URL
-        alt:
-          type: string
-          description: Alt text
-        position:
-          type: integer
-          description: Display order
-    ErrorResponse:
-      type: object
-      description: Standard error response format
-      properties:
-        error:
-          $ref: '#/components/schemas/ApiError'
-          description: Error details with field and message
-      required:
-      - error
-    ApiError:
-      type: object
-      description: Structured error object
-      properties:
-        field:
-          type: string
-          description: Field that caused the error
-        message:
-          type: string
-          description: Human-readable error message
-      required:
-      - field
-      - message
     BulkCreateProductResponse:
       type: object
       properties:
@@ -322,27 +285,9 @@ components:
           items:
             $ref: '#/components/schemas/BulkProductFailure'
           description: Products that failed to create
-    ProductImage:
+    GetProductResponse:
       type: object
-      properties:
-        src:
-          type: string
-          format: uri
-          description: Image URL (must be valid URL)
-        alt:
-          type: string
-          maxLength: 500
-          description: Alt text for accessibility
-        position:
-          type: integer
-          minimum: 1
-          maximum: 100
-          description: Display order
-      required:
-      - src
-    UpdateProductResponse:
-      type: object
-      description: Response for updating a product
+      description: Response for retrieving a product
       properties:
         error:
           oneOf:
@@ -353,22 +298,102 @@ components:
           oneOf:
           - type: 'null'
           - $ref: '#/components/schemas/Product'
-          description: Updated product object, null on error
-        message:
-          type: string
-          description: Success or error message
-    BulkCreateProductRequest:
+          description: Product object, null on error
+    ProductVariantResponse:
       type: object
       properties:
-        products:
+        id:
+          type: string
+          description: Variant ID
+        title:
+          type: string
+          description: Variant name
+        sku:
+          type: string
+          description: Variant SKU
+        price:
+          type: number
+          description: Price in SAR (converted from brand currency)
+        compare_at_price:
+          type: number
+          description: Compare at price in SAR
+        inventory_quantity:
+          type: integer
+          description: Current stock quantity
+        weight:
+          type: number
+          description: Variant weight
+        weight_unit:
+          type: string
+          description: Weight unit
+        requires_shipping:
+          type: boolean
+          description: Requires shipping
+        taxable:
+          type: boolean
+          description: Is taxable
+        barcode:
+          type: string
+          description: Product barcode
+        option1:
+          type: string
+          description: Option 1 value
+        option2:
+          type: string
+          description: Option 2 value
+        option3:
+          type: string
+          description: Option 3 value
+    CreateProductRequest:
+      type: object
+      properties:
+        title:
+          type: string
+          minLength: 1
+          maxLength: 255
+          description: Product name
+        body_html:
+          type: string
+          maxLength: 65535
+          description: Product description (HTML allowed)
+        vendor:
+          type: string
+          maxLength: 255
+          description: Brand/vendor name
+        product_type:
+          type: string
+          maxLength: 255
+          description: Product category
+        tags:
+          type: string
+          maxLength: 1000
+          description: Comma-separated tags
+        handle:
+          type: string
+          pattern: ^[a-z0-9-]+$
+          description: URL slug (auto-generated if not provided)
+        template_suffix:
+          type: string
+          maxLength: 255
+          description: Template suffix
+        published_scope:
+          type: string
+          description: Published scope
+          default: web
+        variants:
           type: array
           minItems: 1
-          maxItems: 500
           items:
-            $ref: '#/components/schemas/CreateProductRequest'
-          description: Array of products to create (maximum 500)
+            $ref: '#/components/schemas/ProductVariant'
+          description: At least one variant required
+        images:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductImage'
+          description: Product images
       required:
-      - products
+      - title
+      - variants
     BulkProductFailure:
       type: object
       description: Details about a product that failed to create in bulk operation
@@ -388,23 +413,27 @@ components:
       - index
       - title
       - errors
-    ProductResponse:
+    BulkCreateProductRequest:
       type: object
-      description: Response for creating a single product
+      properties:
+        products:
+          type: array
+          minItems: 1
+          maxItems: 500
+          items:
+            $ref: '#/components/schemas/CreateProductRequest'
+          description: Array of products to create (maximum 500)
+      required:
+      - products
+    ErrorResponse:
+      type: object
+      description: Standard error response format
       properties:
         error:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/ApiError'
-          description: Error object if request failed, null on success
-        product:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/Product'
-          description: Created product object, null on error
-        message:
-          type: string
-          description: Success or error message
+          $ref: '#/components/schemas/ApiError'
+          description: Error details with field and message
+      required:
+      - error
     BulkProductSuccess:
       type: object
       properties:
@@ -460,51 +489,6 @@ components:
             $ref: '#/components/schemas/ProductImage'
           description: Product images
       description: All fields are optional for updates
-    ProductVariantResponse:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Variant ID
-        title:
-          type: string
-          description: Variant name
-        sku:
-          type: string
-          description: Variant SKU
-        price:
-          type: number
-          description: Price in SAR (converted from brand currency)
-        compare_at_price:
-          type: number
-          description: Compare at price in SAR
-        inventory_quantity:
-          type: integer
-          description: Current stock quantity
-        weight:
-          type: number
-          description: Variant weight
-        weight_unit:
-          type: string
-          description: Weight unit
-        requires_shipping:
-          type: boolean
-          description: Requires shipping
-        taxable:
-          type: boolean
-          description: Is taxable
-        barcode:
-          type: string
-          description: Product barcode
-        option1:
-          type: string
-          description: Option 1 value
-        option2:
-          type: string
-          description: Option 2 value
-        option3:
-          type: string
-          description: Option 3 value
     ProductVariant:
       type: object
       properties:
@@ -557,59 +541,9 @@ components:
       - sku
       - price
       - inventory_quantity
-    CreateProductRequest:
+    ProductResponse:
       type: object
-      properties:
-        title:
-          type: string
-          minLength: 1
-          maxLength: 255
-          description: Product name
-        body_html:
-          type: string
-          maxLength: 65535
-          description: Product description (HTML allowed)
-        vendor:
-          type: string
-          maxLength: 255
-          description: Brand/vendor name
-        product_type:
-          type: string
-          maxLength: 255
-          description: Product category
-        tags:
-          type: string
-          maxLength: 1000
-          description: Comma-separated tags
-        handle:
-          type: string
-          pattern: ^[a-z0-9-]+$
-          description: URL slug (auto-generated if not provided)
-        template_suffix:
-          type: string
-          maxLength: 255
-          description: Template suffix
-        published_scope:
-          type: string
-          description: Published scope
-          default: web
-        variants:
-          type: array
-          minItems: 1
-          items:
-            $ref: '#/components/schemas/ProductVariant'
-          description: At least one variant required
-        images:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProductImage'
-          description: Product images
-      required:
-      - title
-      - variants
-    GetProductResponse:
-      type: object
-      description: Response for retrieving a product
+      description: Response for creating a single product
       properties:
         error:
           oneOf:
@@ -620,7 +554,10 @@ components:
           oneOf:
           - type: 'null'
           - $ref: '#/components/schemas/Product'
-          description: Product object, null on error
+          description: Created product object, null on error
+        message:
+          type: string
+          description: Success or error message
     Product:
       type: object
       properties:
@@ -671,6 +608,69 @@ components:
           type: string
           format: date-time
           description: Last sync timestamp
+    UpdateProductResponse:
+      type: object
+      description: Response for updating a product
+      properties:
+        error:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/ApiError'
+          description: Error object if request failed, null on success
+        product:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/Product'
+          description: Updated product object, null on error
+        message:
+          type: string
+          description: Success or error message
+    ApiError:
+      type: object
+      description: Structured error object
+      properties:
+        field:
+          type: string
+          description: Field that caused the error
+        message:
+          type: string
+          description: Human-readable error message
+      required:
+      - field
+      - message
+    ProductImage:
+      type: object
+      properties:
+        src:
+          type: string
+          format: uri
+          description: Image URL (must be valid URL)
+        alt:
+          type: string
+          maxLength: 500
+          description: Alt text for accessibility
+        position:
+          type: integer
+          minimum: 1
+          maximum: 100
+          description: Display order
+      required:
+      - src
+    ProductImageResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Image ID
+        src:
+          type: string
+          description: Image URL
+        alt:
+          type: string
+          description: Alt text
+        position:
+          type: integer
+          description: Display order
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
