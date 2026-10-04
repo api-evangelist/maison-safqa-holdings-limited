@@ -45,6 +45,9 @@ image: https://cdn.shopify.com/s/files/1/0865/0224/4663/files/logo-ms.svg?v=1763
 specificationVersion: '0.23'
 created: '2026-07-17'
 modified: '2026-07-20'
+x-docs-platform: gitbook
+x-docs-platform-confidence: high
+x-docs-platform-checked: 2026-10-03
 tags:
 - Company
 - Retail
