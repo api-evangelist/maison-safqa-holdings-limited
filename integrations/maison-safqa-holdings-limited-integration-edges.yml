@@ -1,0 +1,18 @@
+generated: '2026-10-12'
+method: none
+source:
+- https://zapier.com/apps/maison-safqa-holdings-limited/integrations
+- https://zapier.com/apps/maison-safqa/integrations
+- https://n8n.io/integrations/maison-safqa-holdings-limited/
+- https://composio.dev/toolkits/maison-safqa-holdings-limited
+- https://monid.ai/tools/maison-safqa-holdings-limited
+checked:
+- https://composio.dev/toolkits/maison-safqa-holdings-limited
+- https://monid.ai/tools/maison-safqa-holdings-limited
+- https://n8n.io/integrations/maison-safqa-holdings-limited/
+- https://zapier.com/apps/maison-safqa-holdings-limited/integrations
+- https://zapier.com/apps/maison-safqa/integrations
+summary: null
+marketplace_apps: []
+edges: []
+templates: []
